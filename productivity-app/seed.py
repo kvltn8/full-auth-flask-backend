@@ -9,10 +9,16 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
+    users_data = [
+        {"username": "kaltun", "password": "password123"},
+        {"username": "abdullahi", "password": "password123"},
+        {"username": "sahal", "password": "password123"},
+    ]
+
     users = []
-    for _ in range(3):
-        u = User(username=fake.unique.user_name())
-        u.set_password("password123")
+    for data in users_data:
+        u = User(username=data["username"])
+        u.set_password(data["password"])
         db.session.add(u)
         users.append(u)
     db.session.commit()
